@@ -1,0 +1,38 @@
+
+Why I hate Garbage Collection
+-------------------------------------------
+
+Garbage Collection, or GC, like any other idea, has it's place.  GC is a great idea that has gone too far. The problem isn't GC, the problem is that programming languages/frameworks rely on GC and neglect other memory management methods.  The analogy of using a Bazooka to kill a fly comes to mind.  Some programmers may not know this but there are 2 other ways to free memory that will always out perform garbage collection by multiple orders of magnitude.
+
+    1. Stack Memory
+    2. Manual Heap Memory
+
+Stack memory is allocated on the stack.  It's life is tied to the life of a function.  This is both an advantage and a disadvantage.  If the memory is only needed during the lifetime of the function, then using stack memory makes cleanup as easy as modifying the stack pointer.  No memory segmentation to worry about, no memory table to manage, no algorithm needed to find free memory, no garbage collection.  Stack memory is perfect for some designs and should be the first option to consider since it will out perform any other memory management method.  However, stack memory doesn't work for everything. A stack uses a FIFO model.  A program stores it's function context on the stack.  If your design requires a function to return memory then stack memory won't work.  Sometimes the design can be changed to accomodate using stack memory.  You could allocate the memory before calling the function and then pass a pointer to the memory for the function to use.  Sometimes this works but this still does not cover all cases.
+
+The next type of memory is Manual Heap Memory.  It works just like garbage collected memory except instead of having the garbage collector find unused memory at runtime, it relys on the programmer or the compiler to determine when the memory should be freed.  C/C++ programmers use malloc/free for this.  Essentially, manual heap memory finds unused memory at compile time, and garbage collected memory finds unused memory at runtime. Manual heap memory is notorious for memory leaks because of languages like C/C++.  Languages usually rely on the programmer to make sure they clean up memory.  However, manual heap memory can be better.  In many cases, the compiler can actually determine when memory is no longer used at compile time.  Say, you inside function foo and call function bar that returns manual heap memory.
+
+void foo()
+{
+   void* mybuffer = bar();
+   // ...(note that code does not save mybuffer)
+}
+
+As long as mybuffer is not saved anywhere outside the foo function, it can be clean up automatically as soon as it is no longer being used, or, can just be cleaned as part of the function cleanup.
+
+
+
+
+Any kind of heap memory is going to cause memory segmentation and require extra overhead to manage it, however, manual heap memory doesn't require the garbage collector to stop execution and analyze memory every so often.
+
+
+
+Let's talk about stack memory.  There is a good reason that GC has taken over the memory management market.  Making stack memory safe to use requires the programmer to "know what they're doing" or for the compiler to be able to guarantee that the stack memory isn't used after it is freed.  GC solves this by determining at runtime whether or not anyone is using the memory so, by definition, GC doesn't have these problems. However, that doesn't mean that stack or heap
+
+Memory can be freed in the context of the code using the memory, or it can be freed in the context of the garbage collector which analyzes all memory and works in the context of "is it safe to free this memory"
+
+Overview
+   Mention GC is overkill
+   I don't hate Garbage Collection, I hate how programmers use it.
+   Show examples of when GC is unnecessary
+   Explain Stack vs Heap
+   

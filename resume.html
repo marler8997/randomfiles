@@ -1,0 +1,220 @@
+<html>
+<title>Resume for Jonathan Marler</title>
+<script type="text/javascript" src="common/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+var projects = [{
+  start : 2014,
+  end   : 0,
+  lang  : 'D C++ C# JavaScript',
+  tags  : '',
+  desc  : "Wrote some small games.  Used OpenGL (after 3.3), SDL, SFML, javascript <a href=\"https://rawgit.com/marler8997/SlimeJavascript/master/SlimeVolleyballLegacy.html\">Slime JavaScript</a> (took a weekend) .  Wrote a NES <a href=\"https://github.com/marler8997/hacknes\">emulator</a>.  Wrote my own programming language (The <a href=\"https://github.com/marler8997/construct\">Construct</a> programming language).  Wrote some linux drivers.  Wrote some tools in D.  Wrote an NFS and NBD server for Windows.  Started a project to convert C# code to D <a href=\"https://github.com/marler8997/CSharpToD\">CSharpToD</a>. Experimented with assembly/bootloaders/operating systems.  Tinkered with LLVM."
+},{
+  start : 2012,
+  end   : 2014,
+  lang  : 'C#',
+  tags  : 'Ansi Serialization Asn.1  Parser NPC Network Libraries Performance HTTP RollingLog Select SHA SNMP Threading WaitActions',
+  desc  : "Developed a vast amount of C# Libraries and Applications for my own personal use and to use with other projects.  As of writing this, it contained on the order of 500 C# source code files adding to about 65,000 lines of code.  Some of this code is small applications and some of it is library code that has been developed with performance in mind. I have since moved the code to github here <a href=\"https://github.com/marler8997/More\">More</a>, here <a href=\"https://github.com/marler8997/AppsDotNet\">AppsDotNet</a> and here <a href=\"https://github.com/marler8997/DotNetStuff\">DotNetStuff</a>. View the README.md document to learn more about the shared libraries.  The code in this repository is meant for a wide array of domains including Networking, Operating Systems, Compilers, Graphics, Physics, Math, Game Development, Languages Development, Threading, and much more."
+},{
+  start : 2011,
+  end   : 2012,
+  lang  : 'C# C C++ Java PHP Perl BASH',
+  tags  : 'Web Server Http Dns Arp Proxy Network FTP SNMP BootLoader x86 ByteCode Assembler Apache PHP Perl AJAX BASH RPC',
+  desc  : "Developed personal WebServer, DnsServer, ArpSpoofer, ProxyServer, NetworkAdapter, FtpServer, SnmpManager. Started developing new language. Wrote a bootloader for x86 processors. Created a new ByteCode language along with a runtime application to execute it and an Assembler/Assembly-Language for it. Created websites with Apache/php/perl/AJAX/bash/C. Developed my own RPC implementation used for remote test execution on HP emulators." },{
+  start : 2010,
+  end   : 2011,
+  lang  : 'C# Java MSBuild C C++',
+  tags  : 'Remote Desktop ASN.1 Network Communication Code Generation .NET Build I2C',
+  desc  : "The HP MFD project. Work I did included developing Java programs such as CerHost (Remote Desktop Application for Windows CE) and High-Level Network protocols, developing C# libraries that facilitate network communication to Canon.s MFDs, interfacing with encryption and compression code, developing an I2C driver, and creating a build system complimentary to our enterprise printer firmware (containing millions of files of source code).  I developed the code to facilitate communication between 3 different operating systems including one that only supported third-party applications written in Java.  The code was developed in on language and translated/compiled to and for different languages and platforms." },{
+  start : 2009,
+  lang  : 'C C++ Flex Bison',
+  tags  : 'Compilers',
+  desc  : "Developed a complete compiler for a simplified version of the C language. Programming was done in C++ using Flex and Bison to complete the parsing stages." },{
+  start : 2009,
+  lang  : 'LISP ACL2 C C++ Java',
+  tags  : 'Security Static Code Analysis Compilers Wind River NSA',
+  desc  : "Developed mathematical security modeling tools in order to verify the information flow in an operating system developed by Wind River Corporation for the NSA. This project was done in Lisp (ACL2) and required a deep knowledge of the C language and the mathematical proof capabilities of ACL2." },{
+  start : 2008,
+  end   : 2008,
+  lang  : 'C C++',
+  tags  : 'Match Research',
+  desc  : "Mathematical research on the Strict Schur Numbers.  My contribution included developing an exhaustive search program to compute the initial answer, writing proofs to validate our solution, writing the final paper in Latex, and submitting it to the mathematical journal Integers: Electronic Journal of Combinatorial Number Theory."
+}];
+function generateProjectsHtml() {
+  html = '';
+  for(i = 0; i < projects.length; i++) {
+    var project = projects[i];
+    html += '<div class="ProjectDiv">';
+    if('start' in project) {
+      html += '<div><span class="Date">';
+      html += project.start;
+      if('end' in project) {
+        html += ' - ';
+        if (project.end == 0) {
+          html += 'Present';
+        } else {
+          html += project.end;
+        }
+      }
+      html += '</span></div>';
+    }
+    html += project.desc;
+    if('lang' in project) {
+      html += '<div><strong>Languages:</strong> <span class="Languages">';
+      html += project.lang;
+      html += '</span></div>';
+    }
+    if('tags' in project) {
+      html += '<div><strong>Tags:</strong> <span class="Tags">';
+      html += project.tags;
+      html += '</span></div>';
+    }
+    html += '</div>';
+  }
+  $('#ProjectsDiv').html(html);
+}
+
+$(document).ready(function() {
+  generateProjectsHtml();
+});
+</script>
+<style type="text/css">
+*{margin:0;padding:0;}
+li{margin:3px 0 3px 20px;}
+h1{margin:15px;}
+p{margin:20px 0;}
+body {
+  font-family:"Times New Roman", Times, serif;
+  text-align:center;
+}
+#BodyDiv {
+  width:800px;
+  border:1px solid #ccc;
+  text-align:left;
+  margin: 10px auto;
+  padding: 10px;
+}
+.TableStyle1 table {
+ border-collapse: collapse;
+}
+.TableStyle1 tr, .TableStyle1 td {
+ border:1px solid black;
+}
+.WorkDiv {
+  margin:10px 0;
+  padding:10px;
+  border:1px solid #aaa;
+}
+.ProjectDiv {
+  margin:10px 0;
+  padding:5px;
+  border:1px solid #aaa;
+}
+.ProjectDiv div {
+  margin:5px 0;
+}
+.ProjectDiv .Date {
+  font-weight:bold;
+}
+</style>
+
+<body>
+<div id="BodyDiv">
+
+<div id="ProfileDiv" style="position:relative;">
+<img src="Johnny.jpg" alt="Johnny" width="200" height="272"/>
+<div style="position:absolute;left:240px;top:0;">
+<h1>Jonathan Marler</h1>
+<table>
+<tr><td>Email: </td><td>johnnymarler@gmail.com</td></tr>
+<tr><td>Occupation: </td><td>Software Engineer</td></tr>
+</table>
+</div>
+</div>
+
+<h1>My Story</h1>
+<p>
+I started college in 2006 majoring in Physics and Mathematics.
+In my sophomore year, a professor took an interest in me and invited me to research combinatorics with him.
+I developed programs to test our theories and spent countless hours proving them.
+He was impressed with my programming ability and suggested I pursue Computer Science instead of Physics.
+I dropped my physics major and took up computer science along with general Mathematics.
+</p><p>
+Once I started programming classes I knew I was where I belonged.
+Even though I was taking as many classes as I could, I wasn't getting enough work from my professor's, so I was constantly working on side projects.
+As I learned more, I would go back to older assignments and rewrite them with new techniques and marvel at what I could do with all this knowledge.
+I was learning all that I could about so many topics and loved every minute of it.
+</p><p>
+The summer after my first year in Computer Science I got an internship programming code analysis software in Lisp for one of my professors.  The professor was impressed with my work and allowed me to take more classes the next semester even though I hadn't taken the prerequisites.  Because of this I was able to graduate after my second year in the Comptuer Science program, along with my Mathematics degree and a 3.9 GPA.
+</p><p>
+A few months before graduating I met with a recruiter from HP.  They flew me out to the site and offered me a job which I took after I graduated.  I thought my education would slow down but to my suprise it was only accelerated.  I wanted to learn everything! I would read RFCs to learn new protocols and create programs just because I thought I could do it better. At work I was given important projects because I was known to be able to write very good code and do it very quickly.  I worked on low level drivers, operating system infrastructure, the USB stack, our build system, complex databases, interactive web sites with jquery/ASP.Net/PHP, and general .NET software.
+</p>
+
+<h1>Language Proficiency</h1>
+<table class="TableStyle1">
+  <tr><th>Name</th><th>Proficiency</th></tr>
+  <tr><td>C#</td><td>Very High</td></tr>
+  <tr><td>C</td><td>Very High</td></tr>
+  <tr><td>D</td><td>Very High</td></tr>
+  <tr><td>HTML/CSS</td><td>Very High</td></tr>
+  <tr><td>C++</td><td>High</td></tr>
+  <tr><td>Java</td><td>High</td></tr>
+  <tr><td>PHP</td><td>High</td></tr>
+  <tr><td>ASPX</td><td>High</td></tr>
+  <tr><td>LISP</td><td>High</td></tr>
+  <tr><td>JavaScript</td><td>High</td></tr>
+  <tr><td>Python</td><td>Low</td></tr>
+  <tr><td>Perl</td><td>Low</td></tr>
+  <tr><td>Ruby</td><td>Low</td></tr>
+  <tr><td>R</td><td>Low</td></tr>
+</table>
+<ul>
+ <li>Low: Spent some time programming in the language.  Have likely coded some small projects in the language but would need to brush up on the standard libraries.</li>
+ <li>High: Hundreds of hours of programming experience.  Likely had to use advanced techniques of the language to
+     interoperate with other languages, interface with different operating systems, etc.</li>
+ <li>Very High: Thousands of hours of programming experience. A very deep knowledge of the language. A good amount of knowledge of the compiler as well.</li>
+</ul>
+
+
+<h1>School</h1>
+
+<strong>University of Idaho</strong><br/>
+College of Science and College of Engineering<br/>
+BS General Mathematics and BS Computer Science<br/>
+Graduation Date: May, 2010 GPA: 3.9<br/>
+
+
+<h1>Work</h1>
+
+<div class="WorkDiv">
+(2008 - 2010) Internship at University of Idaho. <br/>
+Worked on code analysis software written in LISP (ACL2).  This was for professor James Alves Foss who was writing static code analysis software for Wind River.
+</div>
+<div class="WorkDiv">
+(2010 - Present) Software Engineer at HP. <br/>
+Worked on a vast array of projects including low level drivers, operating system infrastructure, the USB stack, the msbuild system, databases, interactive web sites with JQuery/ASP.Net/PHP etc., and a large set of .NET tools.
+</div>
+<div class="WorkDiv">
+I also regularly do contract work that includes:
+<ul>
+  <li>Creating websites.  I've created websites using raw HTML/CSS files, Javascript, PHP, ASP.NET, D/vibe.d, C/C++, Perl, Ruby, and other various scripting languages.  I'm also familair with Microsoft SQL Server, MySQL, and PostgresSQL.</li>
+  <li>Server maintenance and configuration.  I've put together and configured servers for various customers to host a few large websites/android apps</li>
+</div>
+<div class="WorkDiv">
+  If you take a look at my projects page you will notice that I've done alot of work that is not listed here.  This is because most of the programming and learning I do is on my own.  I love to code and love to learn.  Because of this, I have spent alot of my time coding my own projects so I can learn as much as I can.  I have a strong drive to be the best programmer I can be.  This has resulted in me branching to many different kinds of programming, going as in-depth as I can in each field.
+</div>
+
+<h1>Projects</h1>
+I am a very prolific coder who's not afraid of any domain.  I put alot of my projects on <a href="http://github.com/marler8997">GitHub (marler8997)</a> (although some are private so they won't show up). I've done so many projects that to list them would be quite a task.  This is by no means an exhaustive list of all the projects I've done, but it scratches the surface.
+
+<div id="ProjectsDiv"></div>
+
+<!--
+<h1>Addendum (The D Programming Language)</h1>
+
+<p>As I developed my skills and knowledge in programming languages over the years, I became more and more frustrated with the languages themselves.  I documented the features I thought were missing and expiremented with my own languages.  Luckily, I finally found a language that solved many of the issues I had.  In 2014 discovered the <a href="http://www.dlang.org">D Programming Lanuage</a> written by Walter Bright and have since been heavily involved in mastering the language.  There is no perfect programming language but the D programming language is an ideal general purpose programming language.  The biggest problem with D is that it's not popular enough and not as established as some of it's competitors like C++.  However, in my opinion, D is now established enough to be used in any commercial application.</p>
+<p>I mention this because I want to say when D is the best language for an application, its hard to code in other languages.  When you know of a feature in D that would make the code much cleaner/efficient/maintainable it's hard to go without those features. I don't think that every project should start using D, however if I am starting a new project, D is going to be the first language I consider and will have alot of preferential treatment in these kind of decisions.</p>
+-->
+
+</div>
+</body>
+</html>

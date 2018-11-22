@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>Songs</title>
+<style type="text/css">
+table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+td {
+  padding: 5px;
+}
+
+
+.Chord {
+  font-family:monospace;
+}
+</style>
+<!--<script type="text/javascript" src="jquery-1.7.2.min.js"></script>-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+var Note = {Min:1,C:1,D:2,E:3,F:4,G:5,A:6,B:7,Max:7};
+
+var Range = {
+  C1: 1, D1: 2, E1: 3, F1: 4, G1: 5, A1: 6, B1: 7,
+  C2: 8, D2: 9, E2:10, F2:11, G2:12, A2:13, B2:14,
+  C3:15, D3:16, E3:17, F3:18, G3:19, A3:20, B3:21};
+
+function createPianoHtml(start, count, keyWidth, keyHeight) {
+  html = '<div class="PianoDiv" style="margin:0;border:0;padding:0;width:' + (count*keyWidth) + 'px;position:relative;">';
+
+  blackKeyHeight = Math.floor(keyHeight * 5 / 8);
+
+  blackKeyWidth = Math.floor(keyWidth * 2 / 3);
+  blackKeyLeftOffset = Math.floor(keyWidth * 4 / 6);
+
+  // white keys
+  for(var i = 0; i < count; i++) {
+    html += '<span style="margin:0;border:1px solid #888;padding:0;width:' +
+            (keyWidth - 2) + 'px;height:' + (keyHeight - 2) + 'px;display:inline-block;"></span>';
+  }
+
+  // black keys
+  note = start;
+  for(var i = 0; i < count - 1; i++) {
+    if(note != Note.E && note != Note.B) {
+      html += '<span style="margin:0;border:0;padding:0;width:' + blackKeyWidth + 'px;height:' +
+              blackKeyHeight + 'px;background:black;position:absolute;top:0;left:' +
+              (keyWidth * i + blackKeyLeftOffset) + 'px;"></span>';
+    }
+    note++;
+    if(note > Note.Max) note = Note.Min;
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function createChordHtml(chords) {
+  html = '';
+  if(chords.length == 1) {
+    section = chords[0];
+    for(var i = 0; i < section.length; i++) {
+      chord = section[i];
+      if(i > 0) html += ' ';
+      html += '<span class="Chord">' + chord + '</span>';
+    }
+  } else {
+    html += '<table>';
+
+    for(sectionIndex = 0; sectionIndex < chords.length; sectionIndex++) {
+      section = chords[sectionIndex];
+
+      sectionName = section[0];
+      html += '<tr><td>' + sectionName + '</td><td>';
+      
+      for(var i = 1; i < section.length; i++) {
+        chord = section[i];
+        if(i > 1) html += ' ';
+        html += '<span class="Chord">' + chord + '<span>';
+      }
+      html += '</td></tr>';
+    }
+    
+    html += '</table>'
+  }
+
+  return html;
+}
+
+var songMembers = {
+  title:0,
+  artist:1,
+  chords:2,
+  low_note:3,
+  high_note:4,
+  low_falsetto:5,
+  high_falsetto:6,
+};
+var chordSectionIndices = {
+  section:0,
+}
+var songs = [
+  ["I'm Yours"                 , "Jason Mraz"    ,
+      [ ['I', 'V', 'VI', 'IV'] ],
+      Range.C1, Range.G2, Range.G2, Range.A2],
+  ["Someone Like You"          , "Adele"          ,
+      null,
+      Range.G1, Range.G3, 0, 0],
+  ["Creep"                     , "Radiohead",
+      [ ['I', 'III', 'IV', 'iv'] ],
+      Range.E1, Range.D3, Range.G2, Range.E3],
+  ["Hallelujah"                , "Rufus Wainright",
+      [ ["Verse", 'I', 'vi', 'I', 'vi', 'IV', 'V', 'I', 'V'],
+        ["PreChorus", 'I', 'IV', 'V', 'vi', 'IV', 'V', 'iii', 'vi'],
+        ["Chorus", 'IV', 'vi', 'IV', 'I', 'V', 'I', 'V'] ],
+      Range.G1, Range.E3, 0, 0],
+  ["Yesterday"                 , "Beatles",
+      [ ["Verse", 'I', 'vii', 'III', 'vi', 'I', 'IV', 'V', 'I', 'vi', 'II', 'IV', 'I'],
+        ["PreChorus", 'vii', 'III', 'vi', 'V', 'IV'] ],
+      Range.C1, Range.C1, 0, 0],
+  ["Pray for You"              , "Jaron and the Long Road to Love", null, 0, 0, 0, 0],
+  ["The Scientist"             , "Coldplay", null, 0, 0, 0, 0],
+  ["Say Something"             , "A Great Big World", null, 0, 0, 0],
+  ["Somewhere Over the Rainbow", "IZ", null, 0, 0, 0, 0],
+  ["Georgia on my Mind"        , "Ray Charles", null, 0, 0, 0, 0],
+  ["Collide"                   , "Howie Day", null, 0, 0, 0, 0],
+  ["A Song for You"            , "? (Multiple Versions)", null, 0, 0, 0, 0],
+  ["Your Song"                 , "? (Multiple Versions)", null, 0, 0, 0, 0],
+  ["Hey there Delilah"         , "Plain White Ts", null, 0, 0, 0, 0],
+  ["Jar of Hearts"             , "Christina Perry", null, 0, 0, 0, 0],
+  ["Borderline"                , "Chris de Burgh", null, 0, 0, 0, 0],
+  ["Wrecking Ball"             , "Miley Cyrus", null, 0, 0, 0, 0],
+  ["Bubbly"                    , "Colbie Caillat", null, 0, 0, 0, 0],
+  ["The Reason"                , "Hoobastank", null, 0, 0, 0, 0],
+  ["The Rose"                  , "Bette Middler", null, 0, 0, 0, 0],
+  ["The Only Exception"        , "Paramore", null, 0, 0, 0, 0],
+  ["Drive By"                  , "Train", null, 0, 0, 0, 0],
+  ["Fix You"                   , "Coldplay", null, 0, 0, 0, 0],
+  ["Sweet Child of Mine"       , "Guns n Roses", null, 0, 0, 0, 0],
+  ["All I Ask of You"          , "Phanton of the Opera", null, 0, 0, 0, 0],
+  ["Space Oddity"              , "David Bowie", null, 0, 0, 0, 0],
+  ["What does the Fox say"     , "Ylvis", null, 0, 0, 0, 0],
+  ["Counting Starts"           , "One Republic", null, 0, 0, 0, 0]
+];
+
+
+function titleToFile(title) {
+  return title.replace(/'/,"").replace(/ /gi, '');
+}
+
+function pageReady() {
+  var tableHtml = '<table id="SongTable">' +
+    '<tr><th>Title</th><th>Artist</th><th>Range (in Key of C)</th><th>Chords</th></tr>';
+
+  for(var i = 0; i < songs.length; i++) {
+    song = songs[i];
+
+    title     = song[songMembers.title];
+    artist    = song[songMembers.artist];
+    chords    = song[songMembers.chords];
+    low_note  = song[songMembers.low_note];
+    high_note = song[songMembers.high_note];
+    low_falsetto  = song[songMembers.low_falsetto];
+    high_falsetto = song[songMembers.high_falsetto];
+
+    highest_note = (high_note > high_falsetto) ? high_note : high_falsetto;
+
+    tableHtml += '<tr><td><a href="lyrics.php?Song=' + titleToFile(title) + '">' +
+	                  title + '</a></td><td>' + artist + '</td>';
+
+    tableHtml += '<td>' + createPianoHtml(Note.C, highest_note, 10, 40) + '</td>';
+
+    if(chords) {
+      tableHtml += '<td>' + createChordHtml(chords) + '</td>';
+    } else {
+      tableHtml += '<td></td>';
+    }
+
+    tableHtml += '</tr>';
+  }  
+
+  tableHtml += '</table>';
+  document.getElementById('SongDiv').innerHTML = tableHtml;
+
+  // Add Range Piano Highlights
+  var songTable = document.getElementById('SongTable');
+  for(i = 0; i < songs.length; i++) {
+    song = songs[i];
+    low_note = song[songMembers.low_note];
+    high_note = song[songMembers.high_note];
+
+    row = songTable.rows[i + 1];
+
+    $(row).find('.PianoDiv span:eq(' + (low_note-1) + '), .PianoDiv span:eq(' + (high_note-1) + ')').css('background-color','#09f');
+  }
+
+}
+</script>
+</head>
+<body onload="pageReady()">
+
+<div id="SongDiv"></div>
+</html>

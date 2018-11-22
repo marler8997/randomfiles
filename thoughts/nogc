@@ -1,0 +1,140 @@
+
+Note: some of this probably also applies to other function attributes like nothrow/safe/pure but I'm only going to refer to nogc.
+
+Currently, there are 2 cases to mark a function as nogc:
+    Case 1: The programmer doesn't want the function to use the GC.
+    Case 2: The function might be called be called by another function that is marked as nogc.
+
+The idea I'm proposing is to make nogc an inferred attribute.  If nogc is inferred then all functions that are in Case 2 may omit their nogc attribute. In the following example, myUtilFunction falls into Case 2:
+
+example1.d
+-------------------
+// The programmer doesn't care if this function allocates GC memory,
+// but since it doesn't, nogc is inferred by the compiler so it can
+// be called by other nogc functions.
+void myUtilFunction()
+{
+	// code that doesn't allocate GC memory
+}
+// The programmer doesn't  want this function to use GC
+void myNoGCFunction() @nogc
+{
+	myUtilFunction(); // Ok because the compiler inferred nogc
+}
+-------------------
+
+This feature takes work from the programmer and gives it to the compiler. The compiler will need to detect GC code in every function instead of just nogc functions.
+
+Note: Does anyone know if DMD already does this?  How much will this affect the performance of DMD/LDC/GDC?
+
+A consequence for this feature is that nogc can be omitted for many functions that fall into Case 1 as well.  If a function is known to be called by another function, and the programmer doesn't want the GC to be called in either function, they only need to explicitly mark the parent function as nogc. In the following example, myNoGCUtilFunction falls into Case 1 but nogc is omitted because the programmer knows that it will be called by another nogc function.
+
+example2.d
+-------------------
+// The programmer doesn't  want this function to use GC
+// However, nogc is omitted because the programmer knows
+// this function is called by another nogc function
+void myNoGCUtilFunction()
+{
+}
+// The programmer doesn't  want this function to use GC
+void myNoGCFunction() @nogc
+{
+	myUtilFunction();
+}
+-------------------
+
+Now that you understand the idea here's some reasons why this could be a good idea.
+
+1. Refactoribility.
+
+Consequences under the hood
+-------------------
+This feature would take work away from developers but under the hood some decisions will need to be made.  The @nogc functions adds extra characters to the mangled function name (Ni). I'm not familair with how the compiler determins if a function is @nogc, but my guess is that it either determines this from source code or from the object file.  Under this proposal, it would be 
+
+
+
+
+
+
+LowLevelNotes
+----------------
+This feature would have some consequences to the generated code.  Should a function that is inferred to be nogc use using the Ni name mangling? It depends on a few things, since I didn't write the nogc logic in the compiler I can't make that decision.
+
+
+
+I think there may be a way to implement nogc in a way that only requires the nogc attribute in Case 1, when the programmer doesn't want the function to use the GC.  The is because Case 2 can be inferred during compilation.  Furthermore, a programmer should be able to omit the nogc attribute in Case 1 when they know that the function will always be called by another function that they know will be explicitly marked as nogc.
+
+Using this methodology, an application programmer can switch my high-level functions back and forth between nogc without having to touch all my other code.
+
+mycoolprogram.c
+-------------------
+// The programmer doesn't care if this function allocates GC memory,
+// but since it doesn't, it can be called by nogc functions
+void myUtilFunction()
+{
+	// code that doesn't allocate GC memory
+}
+// The programmer does care
+void myNoGCUtilFunction()
+{
+}
+// I don't want this function to use the garbage collector
+void myNoGCFunction() @nogc
+{
+	myUtilFunction();
+}
+-------------------
+
+Here are some of the consequences for making a change like this.
+
+   Current Implementation    |          New Idea           |
+-----------------------------|-----------------------------|
+Compiler only needs to       |Compiler will need to analyze|
+analyze functions marked as  |all functions for code that  |
+nogc for code that allocates |allocates GC memory          |
+GC memory                    |                             |
+-----------------------------|-----------------------------|
+every function every function
+to 
+
+
+
+It's cumbersome for D programmers to mark all their functions with nogc.  I think there may be a better way.  To state the obvious, nogc tells the compiler to verify that the function does not allocate GC memory.  This means the compiler must verify that all ancestor functions also do not allocate GC memory.  The current implementation accomplishes this by verifying that all ancestor functions are also marked as nogc.  Why is this a problem? Adding nogc to a function that has many ancestors becomes a nightmare by requiring the programmer to pour through a tree of functions/files marking each one as nogc.  Or the opposite, if one of the ancestor functions removes it's nogc attribute, then the code requires the removal of many nogc attributes depending on the extent of the design change.
+
+To summarize, currently nogc is used when
+    1. I don't want this function to use the Garbage Collector 
+    2. This function could be used by another function that may not want to use the Garbage collector.
+
+I think that nogc should be used for case 1, and case 2 should be "turned on" by default.  
+
+
+How it should work
+------------------
+
+
+My first idea is to make "-ignore-nogc" a compiler switch. The -ignore-nogc compiler switch indicates to the compiler that if a new function is being compiled, it only needs to analyze nogc/nothrow for functions that , every single function is analyzed for garbage collection.  When the -nogc compile switch is omitted, no garbage collection will be analyzed.
+
+   Note:  A library written for another application to use would always use the -nogc compile switch so that the application may choose to use it or not.
+
+nogc should be default.
+
+Currently, marking a function with @nogc causes the compiler to verify that
+   1. 
+
+   
+
+Proposal.  Make garbage collection analysis a compiler switch.  When the -nogc compiler switch, every single function is analyzed for garbage collection.  When the -nogc compile switch is omitted, no garbage collection will be analyzed.
+
+	   Note:  A library written for another application to use would always use the -nogc compile switch so that the application may choose to use it or not.
+	   
+
+	   
+Idea: nogc function call overloading
+      
+      
+1. What about functions that call callback functions that can be verified at compile time to be nogc?
+   
+   
+Global TLS (Thread Local Storage) in Phobos?
+

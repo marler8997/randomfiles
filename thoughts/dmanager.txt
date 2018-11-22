@@ -1,0 +1,63 @@
+
+Problems mapped to Features
+--------------------------------------------------------------------------------
+
+Problem: Knowing what people want.
+Features: "Priority Points"
+
+Problem: Knowing what the leadership wants.
+Features: "Priority Points" and "Follow Developers"
+
+Problem: Knowing what isn't being worked on.
+Features: "Job Managment"
+
+Problem: Assigning a PR to a person
+Features: "Job Management"
+
+Problem: Getting the status of a job
+Features: "Job Managment"
+
+Problem: Asking leadership what to work on
+Features: "Messages"
+
+Problem: Notification of work being done
+Features: "Messages"
+
+Features
+--------------------------------------------------------------------------------
+
+* Job Management
+
+  Tracks what people are working on.
+  Maps developers to jobs.
+  Assigns leadership (people with power to merge) responsibility to specific jobs/PRs
+
+* Priority Points
+   
+   everyone can distribute their 100 priority points to the features they want
+   It's important that everyone get's 100 points.  It allows a person to realize that if they
+   want a feature done, it is going to take resources away from other features.
+
+* Follow Developers
+
+   their actions show up in your feed
+   their priority points for each issue are shown first
+
+* Messages
+
+   send messages to developers
+   get notifications of activity, when work is done, if a PR needs to be reviewd
+
+* Timeline    
+
+  can add dev time estimates
+
+
+* ranking??
+* track who's looking at what (if someone clicks on a link, it tracks that the link was clicked)
+* add dependencies between jobs
+* link a job to a PR
+
+* Sort jobs by Priority Points
+* Filter jobs by type.  type is a string like "Bug" "Feature"...
+* Track changes...jobs getting done...assignments being made.

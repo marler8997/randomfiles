@@ -1,0 +1,81 @@
+How to charge for data usage
+-------------------------------------------
+The infrastructure will track the cost to transfer the data for each address.
+It will then calculate the DataCost for each address using this equation:
+
+    DataCostForAddress      DataTransferredForAddress
+------------------------- = -------------------------
+      TotalDataCost           TotalDataTransferred
+
+
+TotalDataTransferred     : The total amount of data transferred through the infrastructure
+DataTransferredForAddress: The data transferred for a specific address
+TotalDataCost            : The total cost to transfer all the data through the infrastructure
+                           The TotalDataCost will include all costs including maintenance and profit.
+DataCostForAddress       : The cost to transfer the data for a specified address
+
+
+This ratio maintains equal cost among all users of the infrastructure relative to their usage.
+
+Let's look at an example:
+
+Suppose there is 1 million gigabytes transffered through some entities
+infrastructure that has the following total cost.
+
+TotalDataCost for 1 Month =
+    20 Employees  $100,000
+    Equipment     $ 20,000
+    Rent          $ 10,000
+    Govt. Fees.   $    300
+    Profit        $  5,000
+----------------------------
+                  $135,300
+
+Then if address X used 1 gigabyte, in this entity, it would be charged one millionth
+of the total cost, which is 13.5 cents.
+
+
+
+
+Ideas
+----------------------------------------
+Maintain equal rates per distance at the same speed.
+
+I.E. 1 dollar per gigabyte mile @ 10 Mbps
+
+This would be usefull distance traveled.
+
+
+
+
+
+
+
+
+Infrastructure
+-------------------------------------------
+
+Investors will pay to put in data lines and routing stations.
+
+
+Maintenance
+-------------------------------------------
+
+The infrastructure will be maintained by users of the skynet.
+
+
+
+
+How to use skynet
+-------------------------------------------
+1. Register an address (S.P. Address)
+2. You pay for the data you use
+
+
+
+
+
+
+
+
+

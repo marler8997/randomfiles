@@ -1,0 +1,241 @@
+
+
+
+Drag
+--------------------------------------------------------------------------------
+
+Definition: "Skin Friction" is drag caused by surface roughness.  A thin layer
+            of air clings to the rough surface and creates small eddies
+            contributing to drag.
+ 
+Definition: "Form Drag" is drag caused by the turbulent wake from the separation
+            of airflow from the surface of a structure. Form Drag is related to
+            the size and shape of the structure.
+
+1. Parasite Drag (Caused by non-lifting portions of the helicopter moving through
+               the air)
+
+    Increases much with air speed.
+
+    Form Drag and Skin Friction of the fuselage, cockpit, engine cowlings, rotor
+    hub, landing gear, tail boom, etc.
+
+2. Profile Drag (Caused by Skin Friction and Form Drag of the blades)
+
+    Increases moderately with air speed and slightly with AOA
+
+3. Induced drag (Caused by the production of lift)
+
+    Decreases with air speed and increases with AOA
+
+    Since the lift vector points up and slightly aft relative to the blade,
+    This causes the blade to slightly drag as it spins.
+
+
+Total Drag: The sum of the 3 drag forces.  The plot of air speed and the total
+drag looks like a U shape.  The bottom of the U is where the lift-to-drag ratio
+is the greatest and is referred to as L/Dmax.
+
+
+
+
+
+
+
+Definition: An "airfoil" is a structure with curved surfaces designed to
+give the most favorable ratio of lift to drag through the air.
+
+Airfoils are most often associated with lift but are also used for stability
+(fin), control (elevator), and thrust of propulsion (propeller or rotor).
+
+Definition: The "chord line" of an air foil is a straight line intersecting
+            the leading and trailing edges of an airfoil.
+
+Definition: The "mean camber line" is the line given by every midpoint between
+            the upper and lower surfaces of an airfoil.
+
+
+Question: Why is the tachometer in percentages instead of RPMs?
+
+   Probably to match the engine speed to the rotor speed
+   
+Card: Rotor/Engine Rpm (PowerON and PowerOff)
+
+Card: Lycoming 0-360 J2A
+
+Transmission:
+  1) Mast
+  2) Main Rotor Gear Box (changes direction, and reduces RPM 11:47)
+  3) Tail Rotor Gear Box (changes direction and increasing RPM 3:2)
+  4) Drive Shaft
+
+  
+Definition: A Freewheeling unit allows rotors to continue turning when engine stops.  R22 uses a sprag clutch for this.
+
+
+Swash plate:
+
+Lower Plate: Stationary swash plate
+Upper Plate: Rotating swash plate
+
+
+Two types of fuesl systems:
+1. Gravity fed
+2. Electric
+
+Components:
+Fuel Tanks
+Fuel Lines
+Fuel Shutoff
+Fuel Primer
+Fuel Filter
+Guages
+Sumps
+
+
+Mixture Control:
+  If the helicopter gets to a high enough altitude, the mixture should be leaned because there is less air entering the carberator.
+  
+Carberator Ice:
+  The venturi affect causes the air to be much cooler in the carberator.
+  In the R22, below 18 inches MAP we must apply carberator heat because the CAT (Carberator air temparature guage) does not function at that low of power level.
+  Use Carburetor heat
+     1) Visible moisture
+     2) OAT (Outside air temp guage) -4 to 30 degrees C.
+     3) When OAT is within 15 degrees celcius of the dew point.
+        
+	 
+Electrical
+
+  Battery, Alternator, Wires, BusBar, Circuit Breakers, Switches
+
+
+Environmental System
+
+  1) Heater
+  2) Vents
+  3) AC
+  
+  
+  
+Vne: 102 KIAS <= 3000 ft
+
+
+Night VFR:
+  Nav Lights
+  Anti Collision (strobe)
+  Instrument Lights
+  Landing Lights
+  CI or GI  (Celestial illumincation) or (Ground Illumination)
+
+AOA: Angle between chord line and resultant wind
+
+Magnus Effect: Spinning structure causes difference in air pressure producing lift (like baseball example)
+
+
+Bernoulli's principle leads to Venturi Effect.
+
+As the cross section area decreases you must increase velocity to maintain the same amount of fluid.
+
+
+The Lift force is equal to the total weight of the helicopter.
+Thrust is any force produced by the main rotors minus the lift.
+Drag is force opposing thrust.
+
+
+L/Dmax for R22 is 53 Knots
+
+
+Powered flight is any type of flight where the helicopter is performing under power.
+
+Pendular Action: Caused by over-controlling
+
+Coning: Occurs the most with the most vertical thrust
+
+Coriolis Effect (Law of conservation of Momentum): 
+Figure Skater Effect
+When the blades cone up, it brings more mass closer to the hub, causing an increase in rotor RPM
+
+Translational lift: Improved rotor efficiency resulting from directional flight.
+
+   ETL (Effective Translational Lift): in R22 it is 16 to 24 Knots
+     A sudden transition state from no affect from transitional lift to have translational lift.
+      
+Induced flow: The vertical flow of air caused by the main rotor blades
+
+Transverse Flow Effect: Occurs before ETL. Another sudden transition where half of the main rotor blades are in translational lift and half are not, causing the helicopter to roll to the right (because of gyroscopic procession)
+
+
+================================================================
+Memorize
+================================================================
+
+Vne  (Velocity Never Exceed)
+                  102 KIAS up to 3000 ft density altitude
+                  See placard above 3000 ft density altitude
+
+R22 Beta Engine
+                  Lycoming O-360 J2A
+
+
+------------------------------
+Powerplant Limits
+------------------------------
+
+Max Engine Speed
+                  104% (2652 RPM)
+
+Max Cylinder Head Temperature
+                  500 degrees F (260 degrees C)
+
+Max Oil Temperature
+                  245 degrees F (118 degrees C)
+
+Oil Pressure
+                  Start/Warmup:            Max 115 psi
+                  Idle        : Min 25 psi
+                  Flight      : Min 55 psi Max 95 psi
+
+Minimum Oil (at takeoff)
+                  4 qt
+
+Maximum MAP (Manifold Pressure)
+                  Ranges from 19.9 to 23.2 HG depending on Pressure
+                  Altitude and Outside Air Temp (OAT) (On Placard)
+
+------------------------------
+Rotor Speed Limits
+------------------------------
+
+Rotor Speed Limits
+                  Power ON : Min 101% (515 RPM) Max 104% (530 RPM)
+                  Power Off: Min  90% (459 RPM) Max 110% (561 RPM)
+
+------------------------------
+Weight Limits
+------------------------------
+
+Max Gross Weight (Alpha, Beta, Beta II)
+                  1370 lb
+
+Min Gross Weight
+                  920 lb
+
+Max Per Seat
+                  240 lb
+
+Max in either baggage compartment
+                  50 lb
+
+
+
+
+ 2. Weight Limitations
+ 4. Air speed limitations
+ 5. Page 2-15 (wind limitations)
+ 6. VFR Day/Night requirements
+     Camafoots (FAA Day)
+      Goal (Robinson Day)
+       Nailg (Robinson Night, maybe also robinson night)
+
+

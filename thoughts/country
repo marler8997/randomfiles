@@ -1,0 +1,10 @@
+
+
+One way of organizing laws could be in a tree heirarchy, or maybe an acyclic graph?
+
+The point is that many laws should be able to point to another law saying that
+the reason for this law is to help fullfill the parent law.
+
+The parent law would supercede the child law such that, if someone believes that a particular law does not apply to a particular situation, then they can go to the parent law and see if the action violates the parent law, if it does not then the child law does not apply to the particular case.
+
+If you follow enough parent links, you come to the fundamental laws which show the base morals of the society.
