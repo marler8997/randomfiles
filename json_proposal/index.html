@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON Propositions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Language" content="en"/>
+<style type="text/css">
+*{margin:0;padding:0;}
+html{font-family: 'helvetica neue', Helvetica, Arial, Sans-Serif;}
+body{background:url('bg.png');}
+#page{margin:30px;}
+
+#title{font-size:72px;}
+
+.Proposition{
+margin-top:10px;
+font-family:'Times New Roman';
+}
+.SyntaxChange{
+margin:10px 0;
+padding:5px;
+background:white;
+border:2px solid black;
+font-weight:bold;
+}
+.courier{font-family:'Courier';}
+.example{
+font-family:'Courier';
+margin:10px;padding:5px;
+background:#eee;
+border:dashed 1px black;
+}
+
+.red{color:red;}
+.blue{color:blue;}
+.green{color:green;}
+</style>
+</head>
+<body>
+<div id="page">
+
+<h1 id="title">JSON Propositions</h2>
+
+<h2 class="Proposition">Proposition I</h2><hr/>
+<div class="SyntaxChange">Strings may use single quotes.</div>
+A single quoted string is the same as a double quoted string except that double quotes are not escaped and single quotes are escaped. i.e.
+<div class="example"><font class="blue">"</font>He said <font class="red">\"</font>How's the weather<font class="red">\"</font><font class="blue">"</font> == <font class="blue">'</font>He said "How<font class="red">\'</font>s the weather"<font class="blue">'</font></div>
+
+<p>Adding this feature to JSON would avoid confusion since single quotes are supported in JavaScript.  The extra functionality for current JSON parsers to support single quoted strings should be minimal if it is not already supported.</p>
+
+<h2 class="Proposition">Proposition II</h2><hr/>
+<div class="SyntaxChange">The double quotes around the name of an object pair are optional.</div>
+<div class="example">
+{<font class="green">"JSON"</font>:"In JSON the name of an object pair must always use double quotes"}<br/><br/>
+{<font class="green">JSON</font>:"This is invalid JSON but maybe one day it will be valid"}<br/><br/>
+{<font class="green">'JSON'</font>:'If proposition I is adopted this will be valid'}<br/><br/>
+{<font class="red">'NotValid'</font>:This is not valid because only the name of an object pair may omit the quotes, not the value}</font>
+</div>
+
+<p>The quotes around the name of an object pair are not needed by the parser since the name will always occur inside an object after the initial open brace or a top level comma and end at the colon.  However depending on the implementation, a new token will most likely be needed to recognize a string without quotes.</p>
+<br/>
+<p>Also, like Proposition I, JavaScript supports this feature and adding it to JSON would help avoid confusion.</p>
+
+<h2 class="Proposition">Proposition III</h2><hr/>
+<div class="SyntaxChange">A new syntax to represent a table.</div>
+One way to represent a table in JSON is to use an array of common objects. i.e.
+<div class="example">
+[<br/>
+{<font class="green">"FirstName"</font>:"Jim"&nbsp;&nbsp;&nbsp;,<font class="green">"LastName"</font>:"White"&nbsp;,<font class="green">"Occupation"</font>:"Banker"&nbsp;,<font class="green">"Age"</font>:28},<br/>
+{<font class="green">"FirstName"</font>:"Lisa"&nbsp;&nbsp;,<font class="green">"LastName"</font>:"Miller",<font class="green">"Occupation"</font>:"Cashier",<font class="green">"Age"</font>:42},<br/>
+{<font class="green">"FirstName"</font>:"Bob"&nbsp;&nbsp;&nbsp;,<font class="green">"LastName"</font>:"Jones"&nbsp;,<font class="green">"Occupation"</font>:"Manager",<font class="green">"Age"</font>:35},<br/>
+{<font class="green">"FirstName"</font>:"Ashley",<font class="green">"LastName"</font>:"Brown"&nbsp;,<font class="green">"Occupation"</font>:"Teacher",<font class="green">"Age"</font>:32}<br/>
+]
+</div>
+The drawback of this is that every object must duplicate the same names for every row.  A new syntax could look like:
+<div class="example">
+&lt;<br/>
+<font class="green">FirstName</font>,<font class="green">LastName</font>,<font class="green">Occupation</font>,<font class="green">Age</font>:<br/>
+"Jim"&nbsp;&nbsp;&nbsp;&nbsp;,"White"&nbsp;,"Banker"&nbsp;&nbsp;,28&nbsp;:<br/>
+"Lisa"&nbsp;&nbsp;&nbsp;,"Miller","Cashier"&nbsp;,42&nbsp;:<br/>
+"Bob"&nbsp;&nbsp;&nbsp;&nbsp;,"Jones"&nbsp;,"Manager"&nbsp;,35&nbsp;:<br/>
+"Ashley"&nbsp;,"Brown"&nbsp;,"Teacher"&nbsp;,32<br/>
+&gt;
+</div>
+<p>The new syntax looks much like a csv (comma separated values) file with a header.  The colons act as the object delimiter and the commas act as the value delimiter.</p>
+
+<br/>
+<p>Proposition III breaks JSON's compatibility with JavaScript.  This means that running the eval function on a JSON object will not always work.</p>
+
+<br/>
+<p>Note that this new syntax does not necessarily reduce the amount of characters needed to represent a table because the same concept can be implemented in JSON by representing the data in a two-dimensional array and adding an extra object for the table header: </p>
+<div class="example">
+{<font class="green">"FirstName"</font>:0,<font class="green">"LastName"</font>:1,<font class="green">"Occupation"</font>:2,<font class="green">"Age"</font>:3}<br/>
+[<br/>
+["Jim"&nbsp;&nbsp;&nbsp;&nbsp;,"White"&nbsp;,"Banker"&nbsp;&nbsp;,28&nbsp;],<br/>
+["Lisa"&nbsp;&nbsp;&nbsp;,"Miller","Cashier"&nbsp;,42&nbsp;],<br/>
+["Bob"&nbsp;&nbsp;&nbsp;&nbsp;,"Jones"&nbsp;,"Manager"&nbsp;,35&nbsp;],<br/>
+["Ashley"&nbsp;,"Brown"&nbsp;,"Teacher"&nbsp;,32]<br/>
+]
+</div>
+<p>This representation reduces the size but makes access clumsy.  If the header object was called <font class="courier">header</font>, and the data array was called <font class="courier">data</font>, accessing the string "Lisa" would be <font class="courier">data[1][header.FirstName]</font>. If the data is represented as an array of objects then accessing the same string is simply <font class="courier">data[1].FirstName</font>.  The new syntax allows the data to still be an array of objects but reduces the characters needed to accomplish this.</p>
+
+
+<h2 class="Proposition">Disadvantages of adopting propositions</h2><hr/>
+<ol>
+<li>Proposition I and II means that current programs and libraries that support JSON may need to modify their current JSON libraries.</li>
+<li>Proposition III breaks JSON's compatibility with JavaScript.  This means that running the eval function on a JSON object will not work if the new syntax for creating a set of common objects is present.</li>
+</ol>
+<h2 class="Proposition">Advantages of adopting propositions</h2><hr/>
+<ol>
+<li>Proposition I and II make JSON more similar to JavaScript which helps avoid confusion.</li>
+<li>Proposition III will create a uniform and succinct way of representing a common set of objects.</li>
+</ol>
+
+<h2 class="Proposition">Questions/Comments</h2><hr/>
+Any suggestions are welcome.  If you would like this page to include any additional information on these propositions please email me at <a href="mailto:marler8997@vandals.uidaho.edu">marler8997@vandals.uidaho.edu</a>
+
+</div>
+</body>
+</html>
